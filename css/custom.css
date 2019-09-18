@@ -1,0 +1,7 @@
+.bg-home
+{
+    background-image: url(http://www.wallpaperama.com/post-images/wallpapers/natural/playa-tropical.jpg);
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+}

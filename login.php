@@ -3,7 +3,7 @@ require('vendor/autoload.php');
 
 // create account
 use havaianas\Account;
-if( $_SERVER['REQUEST_METHOD']=='POST' && $_POST['login'] == 'login' ){
+if( $_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['login']) ){
   $email = $_POST['email'];
   $password = $_POST['password'];
   //create an instance of account class
@@ -15,12 +15,14 @@ else{
   $login='';
 }
 
-if( $_SERVER['REQUEST_METHOD']=='POST' && $_POST['register'] == 'register' ){
+if( $_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['register'])){
+    $first_name = $_POST['first'];
+    $last_name = $_POST['last'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     //create an instance of account class
     $acc = new Account();
-    $login = $acc -> register( $email, $password );
+    $login = $acc -> register( $first_name, $last_name, $email, $password );
     
   }
   else{

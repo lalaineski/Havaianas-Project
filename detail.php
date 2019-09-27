@@ -1,12 +1,7 @@
 <?php
 require('vendor/autoload.php');
 
-use aitsyd\Navigation;
-
-$nav = new Navigation();
-$nav_items = $nav -> getNavigation();
-
-use aitsyd\ProductDetail;
+use havaianas\ProductDetail;
 
 //get the product id from url parameter
 if( isset( $_GET['product_id'] ) ==false ){

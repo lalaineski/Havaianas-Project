@@ -1,9 +1,10 @@
 <?php
 namespace havaianas;
+use havaianas\Database;
 
     class Product extends Database{
-        public function _construct() {
-            parent::_construct();
+        public function __construct() {
+            parent::__construct();
         }
 
         public function getProducts(){
@@ -22,6 +23,7 @@ namespace havaianas;
                 ON product.product_id = product_category.product_id
                 WHERE product_category.category_id = ?";
             }
+$query=$query . " ". " group by PRODUCT_ID, product_name, description,price";
 
             $statement = $this -> connection -> prepare( $query );
 

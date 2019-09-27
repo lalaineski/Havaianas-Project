@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+    {% include 'partials/head.twig' %}
+    <body>   
+    {% include 'partials/navigation.twig' %}
+        <main class="container-fluid">
+        <div class="row">
+        {% for product in products %}
+                   
+                    <div class="col-md-4" data-id="{{product.product_id}}">
+                     <a href="detail.php?product_id={{product.product_id}}" class="text-dark">
+                        <img class="img-fluid" src="images/{{product.image}}">
+                    </a>
+                        <h4 class="text-capitalize">{{product.name}}</h4>
+                        <h6 class="price">{{product.price}}</h6>
+                        <p>{{product.description | slice(0,50) ~ '...' }}</p>
+                    
+                    </div>
+                    
+                    {% endfor %}
+        </div>
+        </main>
+        {% include "partials/footer.twig" %}
+        </body>
+        </html>

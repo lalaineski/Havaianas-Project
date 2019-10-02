@@ -1,13 +1,14 @@
 <?php
-namespace aitsyd;
+namespace havaianas;
 
-use aitsyd\Product;
+use havaianas\Product;
+
 
 class ProductDetail extends Product{
     public $product_detail = array();
 
-    public function _construct(){
-        parent::_construct();
+    public function __construct(){
+        parent::__construct();
     }
 
     public function getProductDetail( $id ){
@@ -16,7 +17,8 @@ class ProductDetail extends Product{
         product_id,
         product_name,
         description,
-        price
+        price,
+        sizes
         FROM product
         WHERE product_id = ?
         ";
@@ -25,7 +27,12 @@ class ProductDetail extends Product{
         if( $statement -> execute( )) {
             $result = $statement -> get_result();
             $row = $result -> fetch_assoc();
+            $sizes=array();
+            while($sizerow=$result -> fetch_assoc()){
+                array_push($sizes,$sizerow["sizes"]);
+            }
             $this -> product_detail['product'] = $row;
+            $this -> product_detail['sizes']=$sizes;
             $this -> product_detail['image'] = $this -> getProductImages( $id );
         }
         return $this -> product_detail;

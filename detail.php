@@ -9,9 +9,18 @@ if( isset( $_GET['product_id'] ) ==false ){
     exit();
 }
 
+use havaianas\WishList;
+$wish = new WishList();
+if( $_SERVER['REQUEST_METHOD'] == 'GET' && $_GET['add'] == 'list'){
+    $product_id = $_GET['product_id'];
+    $add = $wish -> addItem($product_id);
+}
+$wish_total = $wish -> getWishListTotal();
+
 //create an instance of ProductDetail class
 $pd = new ProductDetail();
 $detail = $pd -> getProductDetail( $_GET['product_id']);
+
 
 //initialise twig template
 $loader = new Twig_Loader_Filesystem('templates');
@@ -24,8 +33,9 @@ $template = $twig -> load('detail.twig');
 
 //pass value to twig
 echo $template -> render([
-    'navigation' => $nav_items,
     'detail' => $detail,
-    'title' => $detail['product']['product_name']
+    'title' => $detail['product']['product_name'],
+    'wish' => $wish_total,
+
 ]);
 ?>

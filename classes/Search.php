@@ -33,6 +33,7 @@ class Search extends Database{
     product_name LIKE ?
     OR
     description LIKE ?
+    GROUP BY product.product_id, product_name, product.price, product.description
     ";
     $statement = $this -> connection -> prepare( $query );
     $statement -> bind_param('ss', $search_param, $search_param );

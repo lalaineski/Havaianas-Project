@@ -13,9 +13,12 @@
                     </a>
                         <h4 class="text-capitalize">{{product.name}}</h4>
                         <h6 class="price">{{product.price}}</h6>
-                        <p>{{product.description | slice(0,50) ~ '...' }}</p>
-                    
+                        <p>{{product.description | slice(0,100) ~ '...' }}</p>
+                        <div class="d-flex justify-content-end">
+                        <a href="detail.php?product_id={{product.product_id}}" class="btn btn-outline-info">Detail</a>
+                        </div>
                     </div>
+
                     
                     {% endfor %}
         </div>

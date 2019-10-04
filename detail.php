@@ -11,15 +11,20 @@ if( isset( $_GET['product_id'] ) ==false ){
 
 use havaianas\WishList;
 $wish = new WishList();
-if( $_SERVER['REQUEST_METHOD'] == 'GET' && $_GET['add'] == 'list'){
+if( $_SERVER['REQUEST_METHOD'] == 'GET' && isset( $_GET['add'] ) ){
     $product_id = $_GET['product_id'];
-    $add = $wish -> addItem($product_id);
+    //if 'add' == 'list' means the wishlist button has been clicked
+    if( $_GET['add'] == 'list' ){
+        $add = $wish -> addItem($product_id);
+    }
 }
+
 $wish_total = $wish -> getWishListTotal();
 
 //create an instance of ProductDetail class
 $pd = new ProductDetail();
 $detail = $pd -> getProductDetail( $_GET['product_id']);
+//print_r($detail);
 
 
 //initialise twig template

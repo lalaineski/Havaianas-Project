@@ -26,12 +26,17 @@ class ProductDetail extends Product{
         $statement -> bind_param( 'i', $id );
         if( $statement -> execute( )) {
             $result = $statement -> get_result();
-            $row = $result -> fetch_assoc();
-            $sizes=array();
-            while($sizerow=$result -> fetch_assoc()){
-                array_push($sizes,$sizerow["sizes"]);
+            
+            $product=array();
+            while($row=$result -> fetch_assoc()){
+                array_push($product,$row);
             }
-            $this -> product_detail['product'] = $row;
+            $sizes=array();
+            foreach ($product as $size){
+                array_push($sizes,$size["sizes"]);
+            }
+
+            $this -> product_detail['product'] = $product[0];
             $this -> product_detail['sizes']=$sizes;
             $this -> product_detail['image'] = $this -> getProductImages( $id );
         }

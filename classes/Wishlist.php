@@ -163,7 +163,7 @@ class WishList extends Database {
     SELECT
     @product_id := wishlist_item.product_id AS product_id,
     ( SELECT @image_id := product_image.image_id FROM product_image WHERE product_image.product_id = @product_id LIMIT 1 ) AS image_id,
-    ( SELECT image_file_name FROM image WHERE image.image_id = @image_id ) AS image,
+    ( SELECT image_name FROM image WHERE image.image_id = @image_id ) AS image,
     product_name,
     product.price,
     product.description
@@ -172,6 +172,7 @@ class WishList extends Database {
     INNER JOIN product
     ON wishlist_item.product_id = product.product_id
     WHERE wishlist_item.wishlist_id = ?
+    GROUP BY wishlist_item.product_id, product_name, product.price, product.description
     ";
     //get the account id
     $account_id = $this -> getUserAuthStatus();

@@ -16,10 +16,13 @@
                 <h3>{{detail.product.name}}</h3>
                 <h5 class="price">{{detail.product.price}}</h5>
                 <p>{{detail.product.description}}</p>
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-secondary active">
-                        <input type="radio" name="options" id="option1" autocomplete="off" checked>36-38
+                <div class="btn-group btn-group-toggle my-3" data-toggle="buttons">
+                    {% for size in detail.sizes %}
+                    {% set active = (loop.index == 1)? "active" : "" %}
+                    <label for = "{{loop.index}}" class="btn btn-secondary {{active}}">
+                        <input type="radio" name="sizes" id="{{loop.index}}" autocomplete="off" checked>{{size}}
                     </label>
+                    {% endfor %}
                 </div>
 
                 <form id="cart-form w-100" method="get">

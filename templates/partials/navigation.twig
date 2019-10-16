@@ -7,9 +7,14 @@
     <div class="col-md-11">
 
       <div class="row justify-content-end">
+      {%if loggedin==false%}
         <a class="nav-link" href="login.php">Login/Register</a>
+         {%endif%}
         <a class="nav-link" href="list.php">Wishlist</a>
-        <a class="nav-link" href="#">Shopping Cart</a>
+        <a class="nav-link" href="cart.php">Shopping Cart</a>
+        {%if loggedin%}
+        <a class="nav-link" href="#">Log out</a>
+        {%endif%}
       </div>
 
       <div class="row">

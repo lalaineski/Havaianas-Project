@@ -16,6 +16,8 @@ $wish_items = $wish -> getWishListItems();
 //$nav = new Navigation();
 //$navigation = $nav -> getNavigation();
 //create twig loader for templates
+
+if(isset( $_SESSION['auth'])){$loggedin=true;}else{$loggedin=false;}
 $loader = new Twig_Loader_Filesystem('templates');
 //create twig environment and pass the loader
 $twig = new Twig_Environment($loader);
@@ -26,6 +28,7 @@ echo $template -> render( array(
   //  'navigation' => $navigation,
     'wish' => $wish_total,
     'wish_items' => $wish_items,
+    'loggedin' => $loggedin,
     'title' => "Wish List"
   ) );
 ?>

@@ -9,7 +9,7 @@ else{
   $result = '';
 }
 // create navigation
-
+if(isset( $_SESSION['auth'])){$loggedin=true;}else{$loggedin=false;}
 //create twig loader for templates
 $loader = new Twig_Loader_Filesystem('templates');
 //create twig environment and pass the loader
@@ -18,6 +18,7 @@ $twig = new Twig_Environment($loader);
 $template = $twig -> load('results.twig');
 //output the template and pass the data
 echo $template -> render( array(
-  'result' => $result
+  'result' => $result,
+  'loggedin' => $loggedin,
 ) );
 ?>

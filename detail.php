@@ -11,6 +11,10 @@ if( isset( $_GET['product_id'] ) ==false ){
 
 use havaianas\WishList;
 $wish = new WishList();
+
+use havaianas\ShoppingCart;
+$cart = new ShoppingCart();
+
 if( $_SERVER['REQUEST_METHOD'] == 'GET' && isset( $_GET['add'] ) ){
     $product_id = $_GET['product_id'];
     //if 'add' == 'list' means the wishlist button has been clicked
@@ -20,13 +24,14 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET' && isset( $_GET['add'] ) ){
 }
 
 $wish_total = $wish -> getWishListTotal();
+$cart_total = $cart -> getCartTotal();
 
 //create an instance of ProductDetail class
 $pd = new ProductDetail();
 $detail = $pd -> getProductDetail( $_GET['product_id']);
 //print_r($detail);
 
-
+if(isset( $_SESSION['auth'])){$loggedin=true;}else{$loggedin=false;}
 //initialise twig template
 $loader = new Twig_Loader_Filesystem('templates');
 
@@ -41,6 +46,8 @@ echo $template -> render([
     'detail' => $detail,
     'title' => $detail['product']['product_name'],
     'wish' => $wish_total,
+    'cart_count' => $cart_total,
+    'loggedin' => $loggedin
 
 ]);
 ?>

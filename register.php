@@ -21,6 +21,7 @@ else{
     $register = '';
 }
 
+if(isset( $_SESSION['auth'])){$loggedin=true;}else{$loggedin=false;}
 //create twig loader
 //$loader = new \twig\loader\filesystemloader('templates')
 $loader = new Twig_Loader_Filesystem('templates');
@@ -35,6 +36,7 @@ $template = $twig -> load('register.twig');
 //pass value to twig
 echo $template -> render([
     'navigation' => $nav_items,
+    'loggedin' => $loggedin,
     'title' => 'Register for an account',
     'response' => $register
 ]);
